@@ -1,0 +1,243 @@
+/* 
+====== 
+Variables 
+======
+*/
+:root {
+  --kawaiiRed: #FFADAD;
+  --kawaiiOrange: #FFD6A5;
+  --kawaiiYellow: #FDFFB6;
+  --kawaiiGreen: #CAFFBF;
+  --kawaiiBlue: #9BF6FF;
+  --kawaiiViolet: #FFC6FF;
+  --kawaiiDarkBlue: #A0C4FF;
+  --kawaiiPurple: #BDB2FF;
+  --mainOverlay: rgba(35, 10, 36, 0.4);
+  --mainBlack: #222;
+  --mainWhite: #FFFFFC;
+  --mainTransition: all 0.3s linear;
+  --mainSpacing: 0.1rem;
+  --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
+  --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
+  --mainBorderRadius: 0.25rem;
+  --smallWidth: 85vw;
+  --maxWidth: 40rem;
+  --fullWidth: 1170px;
+}
+/* 
+====== 
+Global Styles 
+======
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--kawaiiDarkBlue);
+  background: var(--kawaiiWhite);
+  line-height: 1.4;
+  font-size: 1rem;
+  font-weight: 300;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--slantedFont);
+  margin-bottom: 1.25rem;
+  letter-spacing: var(--mainSpacing);
+}
+p {
+  margin-bottom: 1.25rem;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color: var(--kawaiiPurple);
+}
+img {
+  width: 100%;
+  display: block;
+}
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 
+====== 
+Common class
+======
+*/
+.section {
+  padding: 3rem 0;
+  width: 60vw;
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
+.section-title {
+  font-size: 2rem;
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+  text-align: center;
+  margin-bottom: 3.5rem;
+  margin-top: 1rem;
+}
+
+/* 
+====== 
+Navbar
+======
+*/
+.navbar {
+  background: var(--kawaiiBlue);
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--mainWhite);
+  box-shadow: var(--lightShadow);
+}
+.nav-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: var(--smallWidth);
+  margin: 0 auto;
+  max-width: var(--fullWidth);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+.nav-links a {
+  text-transform: capitalize;
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+  padding: 0.25rem 0.5rem;
+  transition: var(--mainTransition);
+}
+.nav-links a:hover {
+  color: var(--kawaiiOrange);
+}
+.logo {
+  width: 12rem;
+}
+
+/* 
+====== 
+SubMenu
+======
+*/
+.submenu {
+  background: var(--kawaiiYellow);
+  box-shadow: var(--darkShadow);
+  position: absolute;
+  top: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: none;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  transition: var(--transition);
+}
+.submenu::before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid var(--mainWhite);
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.submenu.show {
+  display: block;
+}
+.submenu-center {
+  display: grid;
+  gap: 0.25rem 2rem;
+}
+.submenu h4 {
+  margin-bottom: 1.5rem;
+}
+.submenu-center a {
+  width: 10rem;
+  display: block;
+  color: var(--kawaiiPurple);
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+}
+
+/* 
+====== 
+404
+======
+*/
+.error-page {
+  display: flex;
+  justify-content: center;
+}
+.error-container {
+  text-align: center;
+  text-transform: capitalize;
+}
+
+/*
+======
+account form
+======
+*/
+.form-box {
+  width: 45rem;
+  height: auto;
+  text-align: center;
+  padding: 2rem 4rem;
+}
+
+.form-box button {
+    height: 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--kawaiiPurple);
+    border: none;
+    border-radius: 1.5rem;
+    margin: 0.5rem 1rem;
+    padding: 0 1rem;
+}
+
+.form-item input {
+  color: var(--kawaiiDarkBlue);
+  width: 20rem;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid var(--kawaiiDarkBlue);
+  padding: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+  background: transparent;
+}
+
+.form-item label {
+  font-size: 1rem;
+  color: var(--kawaiiDarkBlue);
+  padding: 0 1rem;
+  margin-bottom: 1.5rem;
+}
