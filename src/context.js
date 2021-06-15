@@ -29,8 +29,8 @@ const subMenuItems = [
 const AppProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({
     logged: false, 
-    username: 'NoReservedSeating', 
-    question: 'What does my name mean>'});
+    username: 'default username', 
+    question: 'default question'});
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
   const [subMenuLocation, setSubMenuLocation] = useState({});
   const [subMenuContent, setSubMenuContent] = useState({page: '123', links:[]});

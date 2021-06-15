@@ -7,6 +7,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Signout from './pages/Signout';
 import ForgetPassword from './pages/ForgetPassword'
+import ResetPassword from './pages/ResetPassword'
 
 import NavBar from './components/NavBar';
 import SubMenu from './components/SubMenu';
@@ -31,6 +32,9 @@ function App() {
         </Route>
         <Route path="/forget">
           <ForgetPassword />
+        </Route>
+        <Route path="/reset">
+          <ResetPassword />
         </Route>
         <Route path="*">
           <NotFound />

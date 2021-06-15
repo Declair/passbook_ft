@@ -1,33 +1,31 @@
 import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {FaUserAlt, FaQuestion, FaSignature} from 'react-icons/fa'
-import {useGlobalContext} from '../context'
 import qs from 'qs'
 
 function ForgetPassword() {
 
-  const {userInfo} = useGlobalContext();
-  const [seqq, setSeqq] = useState('');
+  const [securityQuestion, setSecurityQuestion] = useState('');
   const [usern, setUsern] = useState('');
-  const [validated, setValidated] = useState(false);
   const history = useHistory();
 
   const doGetQuestion = (e) => {
     e.preventDefault();
-    const username = document.getElementById('username').value
+    const inputUsername = document.getElementById('username').value
     const axios = require('axios').default;
     axios({
       method: 'post',
-      url: 'http://localhost:8080/getQuestion',
-      data: qs.stringify({username})  // use qs to stringify data
+      url: 'http://localhost:8080/user/getQuestion',
+      data: qs.stringify({username: inputUsername})  // use qs to stringify data
     }).then(function (response) {
       const {data} = response
-      if(data.code != 100) {
+      if(data.code !== 100) {
         alert(data.msg);
       }
       else {
-        setUsern(username)
-        setSeqq(data.question)
+        console.log(data);
+        setSecurityQuestion(data.question);
+        setUsern(data.username);
       }
     })
     .catch(function (error) {
@@ -35,21 +33,21 @@ function ForgetPassword() {
     });
   }
 
-  const doSubmit = (e) => {
+  const doVerify = (e) => {
     e.preventDefault();
     const answer = document.getElementById('answer').value
     const axios = require('axios').default;
     axios({
       method: 'post',
-      url: 'http://localhost:8080/userForgetPassword',
-      data: qs.stringify({usern, answer})  // use qs to stringify data
+      url: 'http://localhost:8080/user/verification',
+      data: qs.stringify({username: usern, answer})  // use qs to stringify data
     }).then(function (response) {
       const {data} = response
-      if(data.code != 100) {
+      if(data.code !== 100) {
         alert(data.msg);
       }
       else {
-        setValidated(true);
+        history.push('/reset')
       }
     })
     .catch(function (error) {
@@ -57,32 +55,12 @@ function ForgetPassword() {
     });
   }
 
-  const doChangePassword = (e) => {
-    e.preventDefault();
-    const newPassword = document.getElementById('passwordNew').value
-    const axios = require('axios').default;
-    axios({
-      method: 'post',
-      url: 'http://localhost:8080/userResetPassword',
-      data: qs.stringify({usern, newPassword})  // use qs to stringify data
-    }).then(function (response) {
-      const {data} = response
-      if(data.code != 100) {
-        alert(data.msg);
-      }
-      else {
-        history.push('/signin')
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-
-  if(seqq === '') {
+  // hasn't know who is going to reset password yet
+  // going to fetch the security question
+  if(securityQuestion === '') {
     return <section className="section">
     <div className="form-box">
-      <h2>Validation</h2>
+      <h2>Verification</h2>
       <form onSubmit={doGetQuestion}>
         <div className="form-item">
           <label><FaUserAlt/></label>
@@ -94,28 +72,14 @@ function ForgetPassword() {
   </section>
   }
 
-  if(validated) {
-    return <section className="section">
-    <div className="form-box">
-      <h2>Validation</h2>
-      <form onSubmit={doChangePassword}>
-        <div className="form-item">
-          <label><FaUserAlt/></label>
-          <input type="text" id="newPassword" placeholder="new password" autoComplete="false" />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </section>
-  }
-
+  // the security question is fetched
   return <section className="section">
     <div className="form-box">
-      <h2>Validation</h2>
-      <form onSubmit={doSubmit}>
+      <h2>Verification</h2>
+      <form onSubmit={doVerify}>
         <div className="form-item">
           <label><FaQuestion/></label>
-          <input type="text" value={userInfo.question} readOnly value={seqq} />
+          <input type="text" value={securityQuestion} readOnly />
         </div>
         <div className="form-item">
           <label><FaSignature/></label>

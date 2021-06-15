@@ -6,7 +6,7 @@ function Signout() {
   const {setUserInfo} = useGlobalContext();
 
   const doSignout = () => {
-    setUserInfo({logged: false, username: 'defalut us', question: 'default quesf'})
+    setUserInfo({logged: false, username: 'default username', question: 'default question'})
   }
 
   useEffect(()=> {

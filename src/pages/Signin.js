@@ -20,11 +20,11 @@ function Signin() {
     const axios = require('axios').default;
     axios({
       method: 'post',
-      url: 'http://localhost:8080/userLogin',
+      url: 'http://localhost:8080/user/login',
       data: qs.stringify({username, password})  // use qs to stringify data
     }).then(function (response) {
       const {data} = response
-      if(data.code != 100) {
+      if(data.code !== 100) {
         alert(data.msg);
       }
       else {
