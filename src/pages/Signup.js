@@ -47,6 +47,11 @@ function Signup() {
     });
   }
 
+  const doCancel = (e) => {
+    e.preventDefault();
+    history.push('/signin');
+  }
+
   return <section className="section">
     <div className="form-box">
       <h2>Sign up</h2>
@@ -66,13 +71,14 @@ function Signup() {
         </div>
         <div className="form-item">
           <label><FaQuestion/></label>
-          <input type="text" id="question" placeholder="security question" />
+          <input type="text" id="question" placeholder="security question" autoComplete="false"/>
         </div>
         <div className="form-item">
           <label><FaSignature/></label>
-          <input type="text" id="answer" placeholder="answer" />
+          <input type="text" id="answer" placeholder="answer" autoComplete="false"/>
         </div>
         <button type="submit" id="signup" >Sign up</button>
+        <button onClick={doCancel} >Cancel</button>
       </form>
     </div>
   </section>

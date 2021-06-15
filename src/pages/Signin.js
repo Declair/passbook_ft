@@ -10,13 +10,13 @@ function Signin() {
 
   const history = useHistory();
 
-  const inputEl = useRef(null);
-  const inputE2 = useRef(null);
+  const inputUsername = useRef(null);
+  const inputPassword = useRef(null);
 
   const doSignin = (e) => {
     e.preventDefault();
-    const username = inputEl.current.value
-    const password = inputE2.current.value
+    const username = inputUsername.current.value
+    const password = inputPassword.current.value
     const axios = require('axios').default;
     axios({
       method: 'post',
@@ -55,11 +55,11 @@ function Signin() {
       <form onSubmit={doSignin}>
         <div className="form-item">
           <label><FaUserAlt/></label>
-          <input type="text" ref={inputEl} placeholder="username" autoComplete="false" />
+          <input type="text" ref={inputUsername} placeholder="username" autoComplete="false" />
         </div>
         <div className="form-item">
           <label><FaKey/></label>
-          <input type="password" ref={inputE2} />
+          <input type="password" ref={inputPassword} placeholder="password"/>
         </div>
         <button type="submit">Sign in</button>
         <button onClick={gotoSignup} >Sign up</button>

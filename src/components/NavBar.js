@@ -32,7 +32,7 @@ function NavBar() {
   }
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" onClick={closeSubMenu} >
       <div className="nav-center">
         <Link to="/">
           <img src={logo} alt="cocktail" className="logo" />
@@ -40,7 +40,8 @@ function NavBar() {
         <ul className="nav-links">
           <li>
             <Link to="/" onMouseOver={closeSubMenu}>Home</Link>
-            <Link to="/" onMouseOver={displaySubmenu}>Passbook</Link> {/* if the text changed, ref in displaySubmenu() also needs to change  */}
+            <Link to="/" onMouseOver={displaySubmenu}>Passbook</Link>
+            {/* if the text changed, ref in displaySubmenu() also needs to change  */}
             {
               logged ? <Link to="/" onMouseOver={displaySubmenu}>{username}</Link> :
               <Link to="/" onMouseOver={displaySubmenu}>Visitor</Link>

@@ -153,7 +153,7 @@ SubMenu
   display: none;
   padding: 2rem;
   border-radius: 0.75rem;
-  transition: var(--transition);
+  transition: var(--mainTransition);
 }
 .submenu::before {
   content: '';
@@ -224,6 +224,11 @@ account form
     padding: 0 1rem;
 }
 
+.form-box button:hover {
+  color: var(--kawaiiViolet);
+  background-color: var(--kawaiiPurple);
+}
+
 .form-item input {
   color: var(--kawaiiDarkBlue);
   width: 20rem;
@@ -233,6 +238,11 @@ account form
   padding: 0.5rem 1rem;
   margin-bottom: 1.5rem;
   background: transparent;
+}
+
+.form-item input:focus {
+  border: none;
+  border-bottom: 2px solid var(--kawaiiViolet);
 }
 
 .form-item label {
