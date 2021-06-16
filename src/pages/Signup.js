@@ -4,7 +4,7 @@ import {FaUserAlt, FaKey, FaQuestion, FaSignature} from 'react-icons/fa'
 import qs from 'qs'
 
 function Signup() {
-  const [isMatch, setIsMatch] = useState(true);
+  // const [isMatch, setIsMatch] = useState(true);
   const history = useHistory();
 
   const checkIsMatch = () => {
@@ -12,13 +12,10 @@ function Signup() {
     const p2 = document.getElementById("repeatPassword").value;
     if(p1 === p2) {
       document.getElementById("signup").disabled = false;
-      setIsMatch(true);
     }
     else {
       document.getElementById("signup").disabled = true;
-      setIsMatch(false);
     }
-    
   }
 
   const doSignup = (e) => {
@@ -30,7 +27,7 @@ function Signup() {
     const axios = require('axios').default;
     axios({
       method: 'post',
-      url: 'http://localhost:8080/userSignUp',
+      url: 'http://localhost:8080/user/signUp',
       data: qs.stringify({username, password, question, answer})  // use qs to stringify data
     }).then(function (response) {
       const {data} = response

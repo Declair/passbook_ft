@@ -3,10 +3,11 @@ import {Link} from "react-router-dom"
 import {useGlobalContext} from '../context'
 
 function Signout() {
-  const {setUserInfo} = useGlobalContext();
+  const {setUserInfo, setUserPassbook} = useGlobalContext();
 
   const doSignout = () => {
-    setUserInfo({logged: false, username: 'default username', question: 'default question'})
+    setUserPassbook({});
+    setUserInfo({logged: false, username: 'default username', question: 'default question'});
   }
 
   useEffect(()=> {

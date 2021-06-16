@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import {FaSignInAlt, FaEject, FaLock, FaDeaf, FaSitemap} from 'react-icons/fa'
+import {FaSignInAlt, FaEject, FaLock, FaDeaf, FaSitemap, FaClipboardList} from 'react-icons/fa'
 
 const AppContext = React.createContext()
 
@@ -21,7 +21,8 @@ const subMenuItems = [
   {
     page: 'passbook',
     links: [
-      {label: 'map view', icon: <FaSitemap />, url: '/map_view'},
+      { label: 'map view', icon: <FaSitemap />, url: '/map_view'},
+      { label: 'list view', icon: <FaClipboardList />, url: '/list_view'},
     ]
   }
 ]
@@ -34,6 +35,7 @@ const AppProvider = ({ children }) => {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
   const [subMenuLocation, setSubMenuLocation] = useState({});
   const [subMenuContent, setSubMenuContent] = useState({page: '123', links:[]});
+  const [userPassbook, setUserPassbook] = useState({});
 
   const openSubMenu = (category, location) => {
     const content_ = subMenuItems.find((item) => item.page === category);
@@ -47,8 +49,8 @@ const AppProvider = ({ children }) => {
   }
 
   return <AppContext.Provider 
-      value={{userInfo, isSubMenuOpen, subMenuLocation, subMenuContent,
-        setUserInfo, setSubMenuLocation, setSubMenuContent, 
+      value={{userInfo, isSubMenuOpen, subMenuLocation, subMenuContent, userPassbook,
+        setUserPassbook, setUserInfo, setSubMenuLocation, setSubMenuContent, 
         openSubMenu, closeSubMenu}}>
         {children}
     </AppContext.Provider>

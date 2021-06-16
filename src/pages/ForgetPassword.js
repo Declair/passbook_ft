@@ -47,7 +47,12 @@ function ForgetPassword() {
         alert(data.msg);
       }
       else {
-        history.push('/reset')
+        history.push({
+          pathname: '/reset', 
+          state: {  // location state
+            username: usern 
+          }
+        })
       }
     })
     .catch(function (error) {

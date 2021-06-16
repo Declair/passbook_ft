@@ -12,6 +12,7 @@ Variables
   --kawaiiViolet: #FFC6FF;
   --kawaiiDarkBlue: #A0C4FF;
   --kawaiiPurple: #BDB2FF;
+  --kawaiiGray: #B7B6C2;
   --mainOverlay: rgba(35, 10, 36, 0.4);
   --mainBlack: #222;
   --mainWhite: #FFFFFC;
@@ -227,6 +228,11 @@ account form
 .form-box button:hover {
   color: var(--kawaiiViolet);
   background-color: var(--kawaiiPurple);
+}
+
+.form-box button:disabled {
+  color: var(--mainWhite);
+  background-color: var(--kawaiiGray);
 }
 
 .form-item input {
