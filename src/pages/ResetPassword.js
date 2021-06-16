@@ -1,12 +1,12 @@
 import React from 'react'
 import {useHistory, useLocation} from "react-router-dom"
 import {FaKey} from 'react-icons/fa'
+import {useGlobalContext} from '../context'
 
 function ResetPassword() {
+  const {userInfo} = useGlobalContext();
   const history = useHistory();
   const location = useLocation();
-
-  console.log(location.state.username)
 
   const checkIsMatch = () => {
     const p1 = document.getElementById("password").value;
@@ -21,13 +21,23 @@ function ResetPassword() {
 
   const doResetPassword = (e) => {
     e.preventDefault();
-    const usernameForParam = location.state.username;
+    var usernameForParam;
+    // Two cases: 
+    //  1. User has forgotten their password and wants to reset it
+    //  2. User has signed in and wants to reset password
+    if(userInfo.logged === true) {
+      usernameForParam = userInfo.username;
+    }
+    else if(location.state.username !== undefined) {
+      usernameForParam = location.state.username;
+    }
     const password = document.getElementById("password").value;
     const axios = require('axios').default;
     axios({
       method: 'post',
       url: 'http://localhost:8080/user/updateInfo',
-      data:{
+      // back-end uses '@RequestBody Map<String, Object> map', so no need to import qs
+      data: {
         opcode: 1,  // code of reset password
         username: usernameForParam,
         password: password,
@@ -40,7 +50,10 @@ function ResetPassword() {
         alert(data.msg);
       }
       else {
-        alert('success')
+        alert('success');
+        if(userInfo.logged === true) {
+          history.push('/')
+        }
         history.push('/signin')
       }
     })

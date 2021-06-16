@@ -14,7 +14,7 @@ const subMenuItems = [
   {
     page: 'signed',
     links: [
-      { label: 'change password', icon: <FaLock />, url: '/change_password'},
+      { label: 'change password', icon: <FaLock />, url: '/reset'},
       { label: 'sign out', icon: <FaDeaf />, url: '/signout'},
     ]
   },
