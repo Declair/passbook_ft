@@ -7,7 +7,7 @@ function Signout() {
 
   const doSignout = () => {
     setUserPassbook({});
-    setUserInfo({logged: false, username: 'default username', question: 'default question'});
+    setUserInfo({logged: false, username: 'default username', uid: -1});
   }
 
   useEffect(()=> {

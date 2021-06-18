@@ -31,7 +31,7 @@ const AppProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({
     logged: false, 
     username: 'default username', 
-    question: 'default question'});
+    uid: -1});
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
   const [subMenuLocation, setSubMenuLocation] = useState({});
   const [subMenuContent, setSubMenuContent] = useState({page: '123', links:[]});

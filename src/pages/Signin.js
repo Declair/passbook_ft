@@ -30,7 +30,7 @@ function Signin() {
       else {
         setUserInfo({logged: true, 
           username: data.username, 
-          question: data.question})
+          uid: data.uid})
         history.push('/')
       }
     })

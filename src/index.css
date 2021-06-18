@@ -190,6 +190,19 @@ SubMenu
 
 /* 
 ====== 
+loading
+======
+*/
+.dots-loading {
+  width:100px;
+  height:35px;
+  background: radial-gradient(circle closest-side,currentColor 90%, var(--kawaiiPurple)) 0 0/33% 100% no-repeat;
+  animation:d2 1s steps(3) infinite;
+}
+@keyframes d2 {to{background-position:150% 0}}
+
+/* 
+====== 
 404
 ======
 */
