@@ -270,3 +270,29 @@ account form
   padding: 0 1rem;
   margin-bottom: 1.5rem;
 }
+
+/*
+======
+account list
+======
+*/
+.card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+  border: 1px var(--kawaiiDarkBlue) solid;
+  border-radius: 0.75rem;
+}
+
+.card-header {
+  background: var(--kawaiiDarkBlue);
+  color: var(--kawaiiGreen);
+  font-size: 22px;
+  padding: 0.25rem 0.25rem 0.25rem 2rem;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+
+.card-container {
+  padding: 0.25rem 2rem;
+}
