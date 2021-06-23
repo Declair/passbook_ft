@@ -12,6 +12,7 @@ Variables
   --kawaiiViolet: #FFC6FF;
   --kawaiiDarkBlue: #A0C4FF;
   --kawaiiPurple: #BDB2FF;
+  --kawaiiLightGray: #E7E6F2;
   --kawaiiGray: #B7B6C2;
   --mainOverlay: rgba(35, 10, 36, 0.4);
   --mainBlack: #222;
@@ -295,4 +296,12 @@ account list
 
 .card-container {
   padding: 0.25rem 2rem;
+}
+
+.card-container td {
+  padding-right: 1rem;
+}
+
+.card-container .fixed-property td {
+  background-color: var(--kawaiiLightGray);
 }
