@@ -6,9 +6,10 @@ import NotFound from './pages/NotFound';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Signout from './pages/Signout';
-import ForgetPassword from './pages/ForgetPassword'
-import ResetPassword from './pages/ResetPassword'
+import ForgetPassword from './pages/ForgetPassword';
+import ResetPassword from './pages/ResetPassword';
 import AccountList from './pages/AccountList';
+import AccountMap from './pages/AccountMap';
 
 import NavBar from './components/NavBar';
 import SubMenu from './components/SubMenu';
@@ -39,6 +40,9 @@ function App() {
         </Route>
         <Route path="/list_view">
           <AccountList />
+        </Route>
+        <Route path="/map_view">
+          <AccountMap />
         </Route>
         <Route path="*">
           <NotFound />

@@ -4,7 +4,6 @@ const Accounts = ({ accounts }) => {
   return (
       <div>
         {accounts.map((account) => {
-          console.log(account)
           return <Account key={account.aid} {...account} />;
         })}
       </div>
