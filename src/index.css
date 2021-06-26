@@ -298,6 +298,10 @@ account list
   padding: 0.25rem 2rem;
 }
 
+.card-container table {
+  border-spacing: 0px;
+}
+
 .card-container td {
   padding-right: 1rem;
 }
