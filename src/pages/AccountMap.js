@@ -9,35 +9,74 @@ import { useGlobalContext } from '../context'
 
 function AccountMap() {
   const { userInfo, userPassbook } = useGlobalContext();
-  const { chartData, setChartData } = useState({});
   const history = useHistory();
 
   const chartRef = useRef()
   let myChart = null
 
-  const getChartData = () => {
-    
-  }
+  function getChartData() {
+    var accountNodes = []
+    var accountLinks = []
+    var mappings = {}
+    userPassbook.map(function (account) {
+      // collect all the accounts as nodes in the map
+      var node_a = {}
+      node_a.name = String(account.aid);
+      node_a.accountName = account.name;
+      node_a.draggable = true;
+      node_a.itemStyle = { color: '#000' };
+      node_a.symbolSize = [80, 80];
+      accountNodes.push(node_a);
 
-  const renderChart = () => {
-    const chart = echarts.getInstanceByDom(chartRef.current)
-    if (chart) {
-      myChart = chart
-    } else {
-      myChart = echarts.init(chartRef.current)
+      if (account.continueWithAid) {
+        var link = {
+          target: String(account.continueWithAid),
+          source: String(account.aid),
+          desc: 'continue with'
+        }
+        accountLinks.push(link);
+      }
+
+      // get the mapping details to create links
+      account.properties.map(function (property) {
+        if (property.fixed === 1) {
+          if (property.pid in mappings) {
+            if (property.prime === 1) {
+              mappings[property.pid].holders.unshift(account.aid)
+            }
+            else {
+              mappings[property.pid].holders.push(account.aid)
+            }
+          }
+          else {
+            mappings[property.pid] = { propertyName: property.name, holders: [account.aid] }
+          }
+        }
+      })
+    });
+    for (var i in mappings) {
+      if (mappings[i].holders.length > 1) {
+        for (var j = 1; j < mappings[i].holders.length; j++) {
+          var link = {
+            target: String(mappings[i].holders[j]),
+            source: String(mappings[i].holders[0]),
+            desc: mappings[i].propertyName
+          }
+          accountLinks.push(link);
+        }
+      }
     }
-    // to compute option
-    var options = {
+    console.log(accountNodes)
+    console.log(accountLinks)
+
+    var options_ = {
       backgroundColor: '#ccc',
       tooltip: {                  // config for tooltip
         formatter: function (param) {
           if (param.dataType === 'edge') {
-            // return param.data.category + ': ' +
-            // param.data.target;
-            return param.data.target;
+            return param.data.desc;
           }
-          // return param.data.category + ': ' + param.data.name;
-          return param.data.name;
+          return param.data.accountName;
         }
       },
       series: [{
@@ -61,71 +100,36 @@ function AccountMap() {
         label: {
           show: true,
           position: "inside",
-          fontSize: 16
+          fontSize: 16,
+          formatter: function (d) {
+            return d.data.accountName;
+          }
         },
-        data: [{
-          name: "objective1",
-          draggable: true,
-          symbolSize: [80, 80],
-          itemStyle: {
-            color: '#000'
-          }
-        }, {
-          name: "objective2",
-          draggable: true,
-          symbolSize: [80, 80],
-          itemStyle: {
-            color: '#0000ff'
-          }
-        }, {
-          name: "objective3",
-          draggable: true,
-          symbolSize: [80, 80],
-          itemStyle: {
-            color: '#ff0000'
-          }
-        }, {
-          name: "objective4",
-          desc: "lop ksjd mmdc kas",
-          draggable: true,
-          symbolSize: [80, 80],
-          itemStyle: {
-            color: '#ff0000'
-          },
-        }, {
-          name: "objective5",
-          draggable: true,
-          symbolSize: [80, 80],
-          itemStyle: {
-            color: '#00ff00'
-          }
-        }],
-        links: [{
-          target: "objective2",
-          source: "objective1",
-  
-        }, {
-          target: "objective3",
-          source: "objective4",
-  
-        }, {
-          target: "objective4",
-          source: "objective1",
-  
-        }, {
-          target: "objective5",
-          source: "objective1",
-        }]
+        data: accountNodes,
+        links: accountLinks
       }],
-  
       animationEasingUpdate: "quinticInOut",
       animationDurationUpdate: 100
     };
-    myChart.setOption(options)
-    console.log("in renderChart()")
+    return options_;
   }
 
-  useEffect(renderChart, [chartData])
+  function renderChart(options) {
+    const chart = echarts.getInstanceByDom(chartRef.current)
+    if (chart) {
+      myChart = chart
+    } else {
+      myChart = echarts.init(chartRef.current)
+    }
+    myChart.setOption(options)
+  }
+
+  useEffect(() => {
+    renderChart(getChartData())
+    return () => {
+      myChart && myChart.dispose()
+    }
+  }, [])
 
   return (
     <section className="section">
