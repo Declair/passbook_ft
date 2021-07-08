@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import {FaSignInAlt, FaEject, FaLock, FaDeaf, FaSitemap, FaClipboardList} from 'react-icons/fa'
 
 const AppContext = React.createContext()
@@ -23,6 +23,7 @@ const subMenuItems = [
     links: [
       { label: 'map view', icon: <FaSitemap />, url: '/map_view'},
       { label: 'list view', icon: <FaClipboardList />, url: '/list_view'},
+      { label: 'add account', icon: <FaClipboardList />, url: 'add_account'},
     ]
   }
 ]

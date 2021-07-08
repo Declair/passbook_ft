@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useEffect, useRef } from 'react'
 import * as echarts from 'echarts/lib/echarts'
 import 'echarts/lib/chart/graph'
 import 'echarts/lib/component/tooltip'
@@ -9,12 +8,14 @@ import { useGlobalContext } from '../context'
 
 function AccountMap() {
   const { userInfo, userPassbook } = useGlobalContext();
-  const history = useHistory();
 
   const chartRef = useRef()
   let myChart = null
 
   function getChartData() {
+    if(userInfo.logged === false) {
+      return;
+    }
     var accountNodes = []
     var accountLinks = []
     var mappings = {}
@@ -66,8 +67,6 @@ function AccountMap() {
         }
       }
     }
-    console.log(accountNodes)
-    console.log(accountLinks)
 
     var options_ = {
       backgroundColor: '#ccc',
@@ -80,23 +79,10 @@ function AccountMap() {
         }
       },
       series: [{
-        type: "graph",
-        top: '10%',
-        roam: true,
-        focus: 'adjacency',
-        force: {
-          repulsion: 1000,
-          edgeLength: [150, 100]
-        },
-        layout: "force",
-        symbol: 'circle',
-        lineStyle: {
-          color: '#000',
-          width: 1,
-          type: 'solid',
-          opacity: 0.5,
-          curveness: 0
-        },
+        type: "graph", top: '10%',  roam: true, focus: 'adjacency',
+        force: { repulsion: 1000, edgeLength: [150, 100] },
+        layout: "force", symbol: 'circle',
+        lineStyle: { color: '#000', width: 1, type: 'solid', opacity: 0.5, curveness: 0 },
         label: {
           show: true,
           position: "inside",
@@ -108,13 +94,15 @@ function AccountMap() {
         data: accountNodes,
         links: accountLinks
       }],
-      animationEasingUpdate: "quinticInOut",
-      animationDurationUpdate: 100
+      animationEasingUpdate: "quinticInOut", animationDurationUpdate: 100
     };
     return options_;
   }
 
   function renderChart(options) {
+    if(!options) {
+      return;
+    }
     const chart = echarts.getInstanceByDom(chartRef.current)
     if (chart) {
       myChart = chart

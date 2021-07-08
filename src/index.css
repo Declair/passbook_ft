@@ -309,3 +309,7 @@ account list
 .card-container .fixed-property td {
   background-color: var(--kawaiiLightGray);
 }
+
+.shady {
+  color: var(--mainWhite);
+}

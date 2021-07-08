@@ -33,7 +33,7 @@ const Account = ({ aid, name, password, continueWithAid, continueWithName, prope
             !continueWithAid &&
             (<tr>
               <td>Password</td>
-              <td>{password}</td>
+              <td><span className="shady">{password}</span></td>
             </tr>)
           }
           {properties.map((property) => {

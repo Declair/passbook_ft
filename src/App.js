@@ -10,6 +10,7 @@ import ForgetPassword from './pages/ForgetPassword';
 import ResetPassword from './pages/ResetPassword';
 import AccountList from './pages/AccountList';
 import AccountMap from './pages/AccountMap';
+import AddAccount from './pages/AddAccount';
 
 import NavBar from './components/NavBar';
 import SubMenu from './components/SubMenu';
@@ -44,10 +45,12 @@ function App() {
         <Route path="/map_view">
           <AccountMap />
         </Route>
+        <Route path="/add_account">
+          <AddAccount />
+        </Route>
         <Route path="*">
           <NotFound />
         </Route>
-
       </Switch>
     </Router>
   )
