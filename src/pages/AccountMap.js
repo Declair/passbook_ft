@@ -39,6 +39,14 @@ function AccountMap() {
       }
 
       // get the mapping details to create links
+      /* 
+        mappings = {
+          pid1: {
+            propertyName: "...",
+            holders: [aid1, aid2, ...] // aid1 is the prime holder
+          }
+        }
+      */
       account.properties.map(function (property) {
         if (property.fixed === 1) {
           if (property.pid in mappings) {

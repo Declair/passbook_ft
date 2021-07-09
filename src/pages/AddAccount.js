@@ -1,22 +1,26 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom'
 import { useGlobalContext } from '../context';
 
 function AddAccount() {
   const {userInfo, userPassbook} = useGlobalContext();
+  const [selectedProperties, setSelectedProperties] = useState([]);
+  const [fixedPropertyList, setFixedPropertyList] = useState([]);
   const history = useHistory();
-
-  var fixedPropertyList = [];
 
   function gatherFixedProperties() {
     if(!userPassbook) { return; }
+    var temp = []
     userPassbook.map(function (account) {
-      account.properties.map(function (property) {
-        if(property.fixed === 1) {
-          fixedPropertyList.push(property)
+      account.properties.map((property) => {
+        if(property.prime === 1 && property.fixed === 1) {
+          temp.push(property)
         }
       });
     });
+    console.log(temp);
+    setFixedPropertyList(temp);
+    setSelectedProperties([]);
   }
 
   useEffect(()=>{gatherFixedProperties()},[])
@@ -43,6 +47,21 @@ function AddAccount() {
         <h3>Password</h3>
         
         <h3>Properties from Other Accounts</h3>
+        select: 
+        <select>
+          {fixedPropertyList.map((property) => {
+            return <option key={property.pid}>
+              {property.name} : {property.value}
+            </option>
+          })}
+        </select>
+        <ul>
+          {selectedProperties.map((property) => {
+            return <li key={property.pid}>
+              {property.name} : {property.value}
+            </li>
+          })}
+        </ul>
         <h3>Properties of its own</h3>
         <button type="submit">Submit</button>
       </form>
