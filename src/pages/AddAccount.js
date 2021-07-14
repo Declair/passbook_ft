@@ -18,7 +18,6 @@ function AddAccount() {
         }
       });
     });
-    console.log(temp);
     setFixedPropertyList(temp);
     setSelectedProperties([]);
   }
